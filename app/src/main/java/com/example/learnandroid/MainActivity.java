@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.learnandroid.simplerx.MyRxTest;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = MainActivity.class.getSimpleName();
 
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Log.d(TAG, "onClick: ");
         switch (v.getId()) {
+            case R.id.btn_invokerx:
+                new MyRxTest().rxtest();
             default:
                 break;
         }
