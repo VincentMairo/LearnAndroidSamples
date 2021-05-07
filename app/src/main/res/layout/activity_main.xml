@@ -13,5 +13,19 @@
         android:text="invokeRx"
         android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/btn_rxdownloadpic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_invokerx"
+        android:text="rx_downloadpic"
+        android:textAllCaps="false" />
+
+    <ImageView
+        android:id="@+id/img_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_rxdownloadpic"
+        android:src="@mipmap/ic_launcher" />
 
 </RelativeLayout>

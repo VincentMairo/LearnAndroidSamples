@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         findViewById(R.id.btn_invokerx).setOnClickListener(this);
+        findViewById(R.id.btn_invokerx).setOnClickListener(this);
     }
 
     @Override
