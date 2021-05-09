@@ -13,5 +13,17 @@
         android:text="invokeRx"
         android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/btn_rxdownloadpic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_invokerx"
+        android:text="download pic"
+        android:textAllCaps="false" />
 
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_rxdownloadpic" />
 </RelativeLayout>

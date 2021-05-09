@@ -8,12 +8,15 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -35,7 +38,8 @@ public class MyRxTest {
 //        testConcat();
 //        testDefer();
 //        testTimer();
-        testInterval();
+//        testInterval();
+        testSch();
     }
 
     private void testMap() {
@@ -237,7 +241,7 @@ public class MyRxTest {
         });
     }
 
-    private void testTimer(){
+    private void testTimer() {
         Log.d(TAG, "testTimer: 延迟");
         Observable
                 .timer(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
@@ -264,7 +268,7 @@ public class MyRxTest {
                 });
     }
 
-    private void testInterval(){
+    private void testInterval() {
         Log.d(TAG, "testInterval: 测试周期执行任务");
 
         Observable
@@ -277,7 +281,7 @@ public class MyRxTest {
 
                     @Override
                     public void onNext(Long aLong) {
-                        Log.d(TAG, "onNext: "+ aLong);
+                        Log.d(TAG, "onNext: " + aLong);
                     }
 
                     @Override
@@ -291,6 +295,50 @@ public class MyRxTest {
                     }
                 });
 
+    }
+
+    private void testSch() {
+        Observable
+                .just("hello", "rx")
+                .map(new Function<String, String>() {
+                    @Override
+                    public String apply(String s) throws Exception {
+                        Log.d(TAG, "apply: " + s + " " + Thread.currentThread().getName());
+                        return s.concat("_map");
+                    }
+                })
+//                .create(new ObservableOnSubscribe<String>() {
+//                    @Override
+//                    public void subscribe(ObservableEmitter<String> e) throws Exception {
+//                        Log.d(TAG, "subscribe: " + Thread.currentThread().getName());
+//                        e.onNext("hello");
+//                        e.onNext("rx");
+//                        e.onComplete();
+//                    }
+//                })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d(TAG, "onSubscribe: " + Thread.currentThread().getName());
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Log.d(TAG, "onNext: "+s.concat(" ") + Thread.currentThread().getName());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onError: " + Thread.currentThread().getName());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete: " + Thread.currentThread().getName());
+                    }
+                });
     }
 
 }
