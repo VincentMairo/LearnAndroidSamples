@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpUtil {
@@ -31,7 +31,6 @@ public class HttpUtil {
                 .connectTimeout(10000, TimeUnit.SECONDS)
                 .build();
 
-
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 //网络请求框架
@@ -39,7 +38,7 @@ public class HttpUtil {
                 //json解析
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 //rxjava处理工具
-                .addConverterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 }

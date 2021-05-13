@@ -38,6 +38,15 @@ public class ProjectBean {
         return errorMsg;
     }
 
+    @Override
+    public String toString() {
+        return "ProjectBean{" +
+                "data=" + data +
+                ", errorCode=" + errorCode +
+                ", errorMsg='" + errorMsg + '\'' +
+                '}';
+    }
+
     public class Data {
 
         private List<String> children;
@@ -113,6 +122,19 @@ public class ProjectBean {
             return visible;
         }
 
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "children=" + children +
+                    ", courseId=" + courseId +
+                    ", id=" + id +
+                    ", name='" + name + '\'' +
+                    ", order=" + order +
+                    ", parentChapterId=" + parentChapterId +
+                    ", userControlSetTop=" + userControlSetTop +
+                    ", visible=" + visible +
+                    '}';
+        }
     }
 
 }
